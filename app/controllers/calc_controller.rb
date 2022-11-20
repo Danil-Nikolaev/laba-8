@@ -1,31 +1,39 @@
-class CalcController < ApplicationController
-  def input
-  end
+# frozen_string_literal: true
 
-  def evklid(num_1, num_2)
-    while num_1 != 0 && num_2 != 0
-      if num_1 >= num_2 then
-        num_1 %= num_2
-      else num_2 %= num_1
+# This class contoller for work our application
+class CalcController < ApplicationController
+  def input; end
+
+  def evklid(num_one, num_two)
+    while num_one != 0 && num_two != 0
+      if num_one >= num_two
+        num_one %= num_two
+      else
+        num_two %= num_one
       end
     end
-    return num_1 if num_1 != 0
+    return num_one if num_one != 0
 
-    num_2
+    num_two
   end
 
   def numeric(num)
-    Float(num) != nil rescue false
+    !Float(num).nil?
+  rescue StandardError
+    false
   end
 
   def view
-    v1, v2 = params[:v1], params[:v2]
-    if numeric(v1) && numeric(v2) then
+    v1 = params[:v1]
+    v2 = params[:v2]
+    if numeric(v1) && numeric(v2)
       v1 = v1.to_i
       v2 = v2.to_i
-      @result_1 = evklid(v1, v2)
-      @result_2 = (v1 * v2) / @result_1
-    else @result_1,@result_2 = 'Unknow', 'Unknow'
+      @result_one = evklid(v1, v2)
+      @result_two = (v1 * v2) / @result_one
+    else
+      @result_one = 'Unknow'
+      @result_two = 'Unknow'
     end
   end
 end
