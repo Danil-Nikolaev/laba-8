@@ -17,12 +17,6 @@ class CalcController < ApplicationController
     num_two
   end
 
-  def numeric(num)
-    !Float(num).nil?
-  rescue StandardError
-    false
-  end
-
   def view
     v1 = params[:v1]
     v2 = params[:v2]
